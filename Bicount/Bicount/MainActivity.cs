@@ -1,6 +1,9 @@
 ﻿using Android.App;
 using Android.Widget;
 using Android.OS;
+using Bicount.Main;
+using System.Collections.Generic;
+using static Bicount.Main.Enums;
 
 namespace Bicount
 {
@@ -13,6 +16,16 @@ namespace Bicount
 
             // Set our view from the "main" layout resource
             // SetContentView (Resource.Layout.Main);
+            // TODO: FR - Change this to use the UI.
+            Dictionary<PlayerNum, Player> players = new Dictionary<PlayerNum, Player>();
+            Player player1 = new Player(new Name("James", "Macdonald"), PlayerType.Human);
+            Player player2 = new Player(new Name("John", "Smith"), PlayerType.Computer);
+            players.Add(PlayerNum.One, player1);
+            players.Add(PlayerNum.Two, player2);
+
+            Vocabulary vocabulary = Vocabulary.Load();
+            Game game = new Game(players, vocabulary);
+            game.PlayGame();
         }
     }
 }
