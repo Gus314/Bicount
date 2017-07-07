@@ -4,6 +4,7 @@ using Android.OS;
 using Bicount.Main;
 using System.Collections.Generic;
 using static Bicount.Main.Enums;
+using System.Reflection;
 
 namespace Bicount
 {
@@ -23,9 +24,12 @@ namespace Bicount
             players.Add(PlayerNum.One, player1);
             players.Add(PlayerNum.Two, player2);
 
-            Vocabulary vocabulary = Vocabulary.Load();
-            Game game = new Game(players, vocabulary);
-            game.PlayGame();
+            using (var dictionaryStream = Assembly.GetExecutingAssembly().GetManifestResourceStream("Bicount.Resources.dictionary.txt"))
+            {
+                Vocabulary vocabulary = new Vocabulary(dictionaryStream);
+                Game game = new Game(players, vocabulary);
+                game.PlayGame();
+            }
         }
     }
 }

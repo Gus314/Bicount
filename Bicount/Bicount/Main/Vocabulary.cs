@@ -9,6 +9,7 @@ using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
+using System.IO;
 
 namespace Bicount.Main
 {
@@ -16,22 +17,31 @@ namespace Bicount.Main
     {
         private readonly ICollection<Word> words = new List<Word>();
 
-        private Vocabulary()
+        // TODO: FR - Change this resource location.
+        public Vocabulary(System.IO.Stream fileStream)
         {
-            words.Add(Word.Construct("badger"));
-            words.Add(Word.Construct("horse"));
-            words.Add(Word.Construct("cheese"));
+            using (StreamReader reader = new StreamReader(fileStream))
+            {                
+                while (!reader.EndOfStream)
+                {
+                    string line = reader.ReadLine();
+                    try
+                    {
+                        words.Add(Word.Construct(line));
+                    }
+                    catch (InvalidWordException)
+                    {
+                        Console.WriteLine("Unable to add word: '" + line + "'.");
+                    }
+                }
+            }
+
         }
 
         // TODO: FR - Fix Contains function for Words.
         public Boolean Contains(Word word)
         {
             return words.Contains(word);
-        }
-
-        public static Vocabulary Load()
-        {
-            return new Vocabulary();
         }
     }
 }

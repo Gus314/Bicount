@@ -15,7 +15,7 @@ namespace Bicount.Main
     public class Word
     {
         public String Letters { get; }
-        private const int maxLetters = 9;
+        private const int maxLetters = 30;
 
         private Word(String letters)
         {
@@ -38,6 +38,23 @@ namespace Bicount.Main
         {
             var invalidLetters = from letter in letters where letter < 'A' || letter > 'z' select letter;
             return (!invalidLetters.Any()) && letters.Length <= maxLetters;
+        }
+
+        public override int GetHashCode()
+        {
+            return Letters.GetHashCode();
+        }
+
+        public override bool Equals(object obj)
+        {
+            var other = obj as Word;
+
+            if (other == null)
+            {
+                return false;
+            }
+
+            return this.Letters.Equals(other.Letters);
         }
     }
 }
