@@ -92,6 +92,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MainActivity.cs" />
+    <Compile Include="Main\Computer.cs" />
     <Compile Include="Main\LetterGenerator.cs" />
     <Compile Include="Main\Round.cs" />
     <Compile Include="Main\Enums.cs" />

@@ -34,7 +34,7 @@ namespace Bicount.Main
             Letters = "";
             for (int i = 0; i < numberOfLetters; i++)
             {
-                Letters.Append(LetterGenerator.Next());
+                Letters += (LetterGenerator.Next());
             }
         }
 

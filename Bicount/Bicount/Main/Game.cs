@@ -43,12 +43,17 @@ namespace Bicount.Main
             return winner;
         }
 
-        private static void SimulateRound(Round round, uint roundNum)
+        private void SimulateRound(Round round, uint roundNum)
         {
             Console.WriteLine("The letters were: " + round.Letters);
 
-            round.GuessLetters[PlayerNum.One] = "a";
-            round.GuessLetters[PlayerNum.Two] = "badger";
+            foreach(PlayerNum playerNum in Enum.GetValues(typeof(PlayerNum)))
+            {
+                if (Players[playerNum] is Computer)
+                {
+                    round.GuessLetters[playerNum] = ((Computer)Players[playerNum]).DetermineGuess(round.Letters).Letters;
+                }
+            }
         }
 
         public void PlayGame()

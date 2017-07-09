@@ -19,14 +19,16 @@ namespace Bicount
             // SetContentView (Resource.Layout.Main);
             // TODO: FR - Change this to use the UI.
             Dictionary<PlayerNum, Player> players = new Dictionary<PlayerNum, Player>();
-            Player player1 = new Player(new Name("James", "Macdonald"), PlayerType.Human);
-            Player player2 = new Player(new Name("John", "Smith"), PlayerType.Computer);
-            players.Add(PlayerNum.One, player1);
-            players.Add(PlayerNum.Two, player2);
 
             using (var dictionaryStream = Assembly.GetExecutingAssembly().GetManifestResourceStream("Bicount.Resources.dictionary.txt"))
             {
                 Vocabulary vocabulary = new Vocabulary(dictionaryStream);
+
+                var player1 = new Computer(new Name("James", "Macdonald"), PlayerType.Computer, vocabulary);
+                var player2 = new Computer(new Name("John", "Smith"), PlayerType.Computer, vocabulary);
+                players.Add(PlayerNum.One, player1);
+                players.Add(PlayerNum.Two, player2);
+
                 Game game = new Game(players, vocabulary);
                 game.PlayGame();
             }

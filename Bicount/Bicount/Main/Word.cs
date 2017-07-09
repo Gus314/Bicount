@@ -24,6 +24,9 @@ namespace Bicount.Main
 
         public static Word Construct(String letters)
         {
+            // Ensure case is never an issue.
+            letters = letters.ToUpper();
+
             if(IsValid(letters))
             {
                 return new Word(letters);
@@ -55,6 +58,25 @@ namespace Bicount.Main
             }
 
             return this.Letters.Equals(other.Letters);
+        }
+
+        public bool IsContainedIn(string availableLetters)
+        {
+            List<Char> availableLettersList = availableLetters.ToList();
+
+            foreach (char letter in Letters)
+            {
+                if(availableLettersList.Contains(letter))
+                {
+                    availableLettersList.Remove(letter);
+                }
+                else
+                {
+                    return false;
+                }
+            }
+
+            return true;
         }
     }
 }

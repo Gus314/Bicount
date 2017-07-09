@@ -20,8 +20,9 @@ namespace Bicount.Main
         // TODO: FR - Change this resource location.
         public Vocabulary(System.IO.Stream fileStream)
         {
+            Console.WriteLine("Loading vocabulary.");
             using (StreamReader reader = new StreamReader(fileStream))
-            {                
+            {
                 while (!reader.EndOfStream)
                 {
                     string line = reader.ReadLine();
@@ -35,13 +36,19 @@ namespace Bicount.Main
                     }
                 }
             }
-
+            Console.WriteLine("Finished loading vocabulary.");
         }
 
-        // TODO: FR - Fix Contains function for Words.
         public Boolean Contains(Word word)
         {
             return words.Contains(word);
+        }
+
+        public List<Word> WordsOfLength(string letters, uint length)
+        {
+            var lengthWords = from w in words where w.Letters.Count() == length select w;
+            var anagrams = from w in lengthWords where w.IsContainedIn(letters) select w;
+            return anagrams.ToList();
         }
     }
 }

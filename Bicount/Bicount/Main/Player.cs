@@ -13,6 +13,7 @@ using static Bicount.Main.Enums;
 
 namespace Bicount.Main
 {
+    // TODO: FR - Amend design as use of both Player->Computer subclassing and PlayerType enum seems redundant.
     public class Player
     {
         public PlayerType PlayerType{get;}

@@ -16,7 +16,7 @@ namespace Bicount.Main
     {
         private readonly Char[] vowels = { 'A', 'E', 'I', 'O', 'U' };
         private readonly Char[] consonants = { 'B', 'D', 'F', 'G', 'H', 'J', 'K', 'L', 'M', 'N', 'P', 'Q', 'R', 'S', 'T', 'V', 'W', 'X', 'Y', 'Z'};
-        private readonly Random generator = new Random((int) DateTime.Now.Ticks);
+        private readonly Random generator = new Random();
 
         // This should later take a language as a parameter.
         public LetterGenerator()
@@ -34,11 +34,10 @@ namespace Bicount.Main
         {
             uint choice = (uint)generator.Next(consonants.Length);
             return consonants[choice];
-
         }
         public char Next()
         {
-            bool vowel = (0 == generator.Next(1));
+            bool vowel = (0 == generator.Next(2));
             return vowel ? NextVowel() : NextConsonant();
         }
     }
