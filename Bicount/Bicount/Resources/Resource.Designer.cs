@@ -1973,6 +1973,15 @@ namespace Bicount
 			// aapt resource value: 0x7f06004a
 			public const int contentPanel = 2131099722;
 			
+			// aapt resource value: 0x7f060080
+			public const int currentLetters = 2131099776;
+			
+			// aapt resource value: 0x7f06007f
+			public const int currentLettersCaption = 2131099775;
+			
+			// aapt resource value: 0x7f060081
+			public const int currentWord = 2131099777;
+			
 			// aapt resource value: 0x7f060050
 			public const int custom = 2131099728;
 			
@@ -2231,6 +2240,12 @@ namespace Bicount
 			// aapt resource value: 0x7f060078
 			public const int time = 2131099768;
 			
+			// aapt resource value: 0x7f060083
+			public const int timeRemaining = 2131099779;
+			
+			// aapt resource value: 0x7f060082
+			public const int timeRemainingCaption = 2131099778;
+			
 			// aapt resource value: 0x7f060043
 			public const int title = 2131099715;
 			
@@ -2420,31 +2435,31 @@ namespace Bicount
 			public const int design_navigation_menu_item = 2130903076;
 			
 			// aapt resource value: 0x7f030025
-			public const int Main = 2130903077;
+			public const int notification_media_action = 2130903077;
 			
 			// aapt resource value: 0x7f030026
-			public const int notification_media_action = 2130903078;
+			public const int notification_media_cancel_action = 2130903078;
 			
 			// aapt resource value: 0x7f030027
-			public const int notification_media_cancel_action = 2130903079;
+			public const int notification_template_big_media = 2130903079;
 			
 			// aapt resource value: 0x7f030028
-			public const int notification_template_big_media = 2130903080;
+			public const int notification_template_big_media_narrow = 2130903080;
 			
 			// aapt resource value: 0x7f030029
-			public const int notification_template_big_media_narrow = 2130903081;
+			public const int notification_template_lines = 2130903081;
 			
 			// aapt resource value: 0x7f03002a
-			public const int notification_template_lines = 2130903082;
+			public const int notification_template_media = 2130903082;
 			
 			// aapt resource value: 0x7f03002b
-			public const int notification_template_media = 2130903083;
+			public const int notification_template_part_chronometer = 2130903083;
 			
 			// aapt resource value: 0x7f03002c
-			public const int notification_template_part_chronometer = 2130903084;
+			public const int notification_template_part_time = 2130903084;
 			
 			// aapt resource value: 0x7f03002d
-			public const int notification_template_part_time = 2130903085;
+			public const int RoundPage = 2130903085;
 			
 			// aapt resource value: 0x7f03002e
 			public const int select_dialog_item_material = 2130903086;

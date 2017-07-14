@@ -43,28 +43,20 @@ namespace Bicount.Main
             return winner;
         }
 
-        private void SimulateRound(Round round, uint roundNum)
+        public Round NextRound()
         {
-            Console.WriteLine("The letters were: " + round.Letters);
-
-            foreach(PlayerNum playerNum in Enum.GetValues(typeof(PlayerNum)))
-            {
-                if (Players[playerNum] is Computer)
-                {
-                    round.GuessLetters[playerNum] = ((Computer)Players[playerNum]).DetermineGuess(round.Letters).Letters;
-                }
-            }
+           return new Round(Vocabulary, LetterGenerator, Players);
         }
 
         public void PlayGame()
         {
-            Console.WriteLine("Starting a new game.");
+           /* Console.WriteLine("Starting a new game.");
 
 
             for(uint i = 0; i < numRounds; i++)
             {
-                var round = new Round(Vocabulary, LetterGenerator);
-                SimulateRound(round, i);
+                var round = 
+                round.Play();
 
                 Dictionary<PlayerNum, uint> scores = round.DetermineScores();
 
@@ -77,7 +69,7 @@ namespace Bicount.Main
             }
 
             var winner = DetermineWinner();
-            Console.WriteLine("The winner was: " + winner.Name.Forename + " " + winner.Name.Surname + ".");
+            Console.WriteLine("The winner was: " + winner.Name.Forename + " " + winner.Name.Surname + ".");*/
         }
     }
 }

@@ -10,6 +10,7 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using static Bicount.Main.Enums;
+using System.Timers;
 
 namespace Bicount.Main
 {
@@ -20,13 +21,15 @@ namespace Bicount.Main
         private readonly LetterGenerator LetterGenerator;
         public String Letters { get; private set; }
         private Vocabulary Vocabulary;
+        private Dictionary<PlayerNum, Player> Players { get; }
 
-        public Round(Vocabulary vocabulary, LetterGenerator letterGenerator)
+        public Round(Vocabulary vocabulary, LetterGenerator letterGenerator, Dictionary<PlayerNum, Player> players)
         {
             Vocabulary = vocabulary;
             GuessLetters = new Dictionary<PlayerNum, string>();
             LetterGenerator = letterGenerator;
             DetermineLetters();
+            Players = players;
         }
 
         private void DetermineLetters()
@@ -67,5 +70,15 @@ namespace Bicount.Main
             return scores;
         }
 
+        public void MakeComputerGuesses()
+        {
+            foreach (PlayerNum playerNum in Enum.GetValues(typeof(PlayerNum)))
+            {
+                if (Players[playerNum] is Computer)
+                {
+                    GuessLetters[playerNum] = ((Computer)Players[playerNum]).DetermineGuess(Letters).Letters;
+                }
+            }
+        }
     }
 }

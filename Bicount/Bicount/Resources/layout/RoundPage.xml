@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical"
+            rowcount="3"
+            columncount ="2">
+
+  <TextView android:id="@+id/currentLettersCaption"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Current Letters:"/>
+  <TextView android:id="@+id/currentLetters"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="abcdefghi"/> 
+  
+  <EditText android:id="@+id/currentWord"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:lines="1"
+            android:maxLines="1"
+            android:maxLength="9"
+            android:text="" />  
+  <TextView android:id="@+id/timeRemainingCaption"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Time Remaining:" />
+  <TextView android:id="@+id/timeRemaining"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:text="60" />
+</GridLayout>
