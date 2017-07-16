@@ -23,26 +23,37 @@ namespace Bicount.Main
             Random = new Random();
         }
 
-        // TODO: FR - Improve AI.
-        // TODO: FR - What if no words are available?
+
         public Word DetermineGuess(String letters)
         {
             Word selectedWord = null;
-            const uint maxAttempts = 100;
-            uint numAttempts = 0;
-            do
+
+            IList<uint> wordLengths = new List<uint>();
+            for (uint i = 1;  i <= Round.NumberOfLetters; i++)
             {
-                uint numberLetters = (uint)Random.Next(1, 10);
-                List<Word> wordsOfLength = Vocabulary.WordsOfLength(letters, numberLetters);
-                if(wordsOfLength.Any())
+                wordLengths.Add(i);
+            }
+
+            
+            while(wordLengths.Count() > 0)
+            {
+                uint numberOfLettersIndex = (uint)Random.Next(wordLengths.Count());
+                uint numberOfLetters = wordLengths[(int)numberOfLettersIndex];
+                wordLengths.RemoveAt((int)numberOfLettersIndex);
+
+                List<Word> wordsOfLength = Vocabulary.WordsOfLength(letters, numberOfLetters);
+                if (wordsOfLength.Any())
                 {
                     uint wordChoice = (uint)Random.Next(wordsOfLength.Count());
-                    selectedWord = wordsOfLength[(int) wordChoice];
+                    selectedWord = wordsOfLength[(int)wordChoice];
                 }
 
-                numAttempts++;
+                if(selectedWord != null)
+                {
+                    break;
+                }
+            }
 
-            } while ((selectedWord == null) && (numAttempts < maxAttempts));
 
             return selectedWord ?? Word.Construct("");
         }

@@ -17,6 +17,7 @@ namespace Bicount.Main
     public class Round
     {
         private const int numberOfLetters = 9;
+        public static uint NumberOfLetters { get { return numberOfLetters; } }
         public Dictionary<PlayerNum, String> GuessLetters { get; }
         private readonly LetterGenerator LetterGenerator;
         public String Letters { get; private set; }
@@ -52,6 +53,7 @@ namespace Bicount.Main
         public Dictionary<PlayerNum, uint> DetermineScores()
         {
             Dictionary<PlayerNum, uint> scores = new Dictionary<PlayerNum, uint>();
+
             uint playerOneScore = PossiblePoints(PlayerNum.One);
             uint playerTwoScore = PossiblePoints(PlayerNum.Two);
 

@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical"
+            rowcount="5"
+            columncount ="1">
+
+  <TextView android:id="@+id/player1FinalScore"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=""/>
+
+  <TextView android:id="@+id/player2FinalScore"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text=""/>
+
+  <TextView android:id="@+id/finalResultDisplay"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=""/>
+
+  <Button android:id="@+id/endGameButton"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="End Game"/>
+  
+  <Button android:id="@+id/playAgainButton"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="Play Again"/>
+</GridLayout>

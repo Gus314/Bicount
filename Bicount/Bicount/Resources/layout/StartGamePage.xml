@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical"
+            rowcount="3"
+            columncount ="2">
+
+  <TextView android:id="@+id/forenameCaption"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Forename:"/>
+  <EditText android:id="@+id/forenameEntry"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:lines="1"
+           android:maxLines="1"
+           android:maxLength="9"
+           android:text="" />
+  
+  <TextView android:id="@+id/surnameCaption"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="Surname"/>
+  <EditText android:id="@+id/surnameEntry"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:lines="1"
+         android:maxLines="1"
+         android:maxLength="9"
+         android:text="" />
+
+  <Button android:id="@+id/startGameButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Start Game" />
+</GridLayout>

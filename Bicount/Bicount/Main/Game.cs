@@ -19,6 +19,7 @@ namespace Bicount.Main
         private Vocabulary Vocabulary { get; }
         private const int numRounds = 3;
         private readonly LetterGenerator LetterGenerator;
+        private int currentRound = 0;
 
         public Game(Dictionary<PlayerNum, Player> players, Vocabulary vocabulary)
         {
@@ -27,49 +28,32 @@ namespace Bicount.Main
             LetterGenerator = new LetterGenerator();
         }
 
-        private Player DetermineWinner()
+        public IEnumerable<Player> DetermineWinners()
         {
-            // TODO: FR - What about a draw?
-            Player winner = Players.Values.First();
-
-            foreach(Player player in Players.Values)
+            // Allow for the possibility of a draw.
+            uint maxScore = 0;
+            foreach (Player player in Players.Values)
             {
-                if (player.Score > winner.Score)
+                if (player.Score > maxScore)
                 {
-                    winner = player;
+                    maxScore = player.Score;
                 }
             }
 
-            return winner;
+            return (from player in Players.Values where player.Score == maxScore select player);      
         }
 
         public Round NextRound()
         {
+           // TODO: FR - What if game is finished?
+           currentRound++;
            return new Round(Vocabulary, LetterGenerator, Players);
         }
 
-        public void PlayGame()
+        public bool IsFinished()
         {
-           /* Console.WriteLine("Starting a new game.");
-
-
-            for(uint i = 0; i < numRounds; i++)
-            {
-                var round = 
-                round.Play();
-
-                Dictionary<PlayerNum, uint> scores = round.DetermineScores();
-
-                foreach(PlayerNum playerNum in Enum.GetValues(typeof(PlayerNum)))
-                {
-                    Players[playerNum].Score += scores[playerNum];
-                    Console.WriteLine(Players[playerNum].Name.Forename + " scored " + scores[playerNum] + " points.");
-                    Console.WriteLine("Their word was : " + round.GuessLetters[playerNum] + ".");
-                }
-            }
-
-            var winner = DetermineWinner();
-            Console.WriteLine("The winner was: " + winner.Name.Forename + " " + winner.Name.Surname + ".");*/
+            // TODO: FR - Variable naming could be misleading here, as currentRound should actually be the last round played when this returns true.
+            return (numRounds == currentRound);
         }
     }
 }
