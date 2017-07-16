@@ -19,17 +19,25 @@ namespace Bicount
         private Player player1;
         private Player player2;
         private Vocabulary vocabulary;
+        private Timer roundTimer;
+        private Timer secondTimer;
 
-        private void OnTimedEvent(Object source, System.Timers.ElapsedEventArgs e)
+        private void OnTimedEvent()
         {
-            TextView playerGuessText = (TextView)FindViewById(Resource.Id.currentWord);
-            round.GuessLetters[PlayerNum.One] = playerGuessText.Text;
+            secondTimer.Stop();
+            roundTimer.Stop();
+
+            EditText currentWordText = (EditText)FindViewById(Resource.Id.currentWord);
+            round.GuessLetters[PlayerNum.One] = currentWordText.Text;
             round.MakeComputerGuesses(); // TODO: FR - If no word exists, this may crash.
 
-            Console.WriteLine("set");
             SetContentView(Resource.Layout.RoundResultsPage);
-            Console.WriteLine("update");
             UpdateRoundResultsPage();
+        }
+
+        private void DispatchOnTimedEvent(Object source, System.Timers.ElapsedEventArgs e)
+        {
+            RunOnUiThread(OnTimedEvent);
         }
 
         private void UpdateEndGamePage()
@@ -86,34 +94,29 @@ namespace Bicount
 
         private void UpdateRoundResultsPage()
         {
-            Console.WriteLine("0");
             Dictionary<PlayerNum, uint> scores = round.DetermineScores();
-            Console.WriteLine("1");
+
             TextView player1ResultWordText = (TextView)FindViewById(Resource.Id.player1resultword);
             player1ResultWordText.Text = player1.Name.Forename + " " + player1.Name.Surname + " " + "had the word '" + round.GuessLetters[PlayerNum.One] + "'.";
-            Console.WriteLine("2");
+
             TextView player2ResultWordText = (TextView)FindViewById(Resource.Id.player2resultword);
             player2ResultWordText.Text = player2.Name.Forename + " " + player2.Name.Surname + " " + "had the word '" + round.GuessLetters[PlayerNum.Two] + "'.";
-            Console.WriteLine("3");
+
             TextView roundScoreDisplayText = (TextView)FindViewById(Resource.Id.roundscoredisplay);
             bool draw = (scores[PlayerNum.One] == scores[PlayerNum.Two]);
             if(draw)
             {
-                Console.WriteLine("5");
                 roundScoreDisplayText.Text = "Both players scored " + scores[PlayerNum.One] +" points.";
             }
             else if(scores[PlayerNum.One] > scores[PlayerNum.Two])
             {
-                Console.WriteLine("6");
                 roundScoreDisplayText.Text = player1.Name.Forename + " " + player1.Name.Surname + " scored " + scores[PlayerNum.One] + " points.";
             }
             else // player two scored more points than player one.
             {
-                Console.WriteLine("7");
                 roundScoreDisplayText.Text = player2.Name.Forename + " " + player2.Name.Surname + " scored " + scores[PlayerNum.Two] + " points.";
             }
-            Console.WriteLine("4");
-            Console.WriteLine("setting up click.");
+
             Button continueButton = (Button)FindViewById(Resource.Id.continueButton);
             continueButton.Click += OnClickContinueButton;
         }
@@ -157,7 +160,12 @@ namespace Bicount
             UpdateStartGamePage();
         }
 
-        private void UpdateTimer(Object source, EventArgs args)
+        private void DispatchUpdateTimer(Object source, EventArgs args)
+        {
+            RunOnUiThread(UpdateTimer);
+        }
+
+        private void UpdateTimer()
         {
             secondsPassed++;
             TextView timeRemaining = (TextView)FindViewById(Resource.Id.timeRemaining);
@@ -182,19 +190,19 @@ namespace Bicount
             TextView currentLetters = (TextView)FindViewById(Resource.Id.currentLetters);
             currentLetters.Text = round.Letters;
 
-            const uint roundSeconds = 10;
+            const uint roundSeconds = 60;
             const uint roundMilliseconds = roundSeconds * 1000;
-            Timer roundTimer = new Timer(roundMilliseconds)
+            roundTimer = new Timer(roundMilliseconds)
             {
                 AutoReset = false
             };
-            roundTimer.Elapsed += OnTimedEvent;
+            roundTimer.Elapsed += DispatchOnTimedEvent;
 
-            Timer secondTimer = new Timer(1000); // One second timer.
-            secondTimer.Elapsed += UpdateTimer;
+            secondTimer = new Timer(1000); // One second timer.
+            secondTimer.Elapsed += DispatchUpdateTimer;
 
             roundTimer.Enabled = true;
-            //secondTimer.Enabled = true;
+            secondTimer.Enabled = true;
         }
     }
 }
